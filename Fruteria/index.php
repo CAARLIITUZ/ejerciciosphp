@@ -1,124 +1,89 @@
 <?php
-// Incluye el archivo donde está el array de precios de las frutas
+// Maneja una lista de precios almacenada en el array precios
 require_once "precios.php";
-
-// Inicia o continúa la sesión
 session_start();
 
-/*
- Manejo de la sesión:
- - 'cliente'  → nombre del cliente
- - 'pedidos'  → array asociativo donde la clave es la fruta y el valor es la cantidad
-*/
+// Manejo de la sesión con dos valores
+// 'cliente' => nombre del cliente
+// 'pedidos' => array asociativo fruta => cantidad
 
 
-// Si llega un nombre de cliente por GET y aún no hay cliente en la sesión:
-// crea un nuevo cliente y una tabla de pedidos vacía
+// Nuevo cliente: anoto en la sesión su nombre y creo su tabla de pedidos vacía
 if (isset($_GET['cliente']) && !isset($_SESSION['cliente']) ) {
-    $_SESSION['cliente'] = $_GET['cliente'];   // Guardamos el nombre del cliente
-    $_SESSION['pedidos'] = [];                 // Inicializamos array vacío para los pedidos
+    $_SESSION['cliente'] = $_GET['cliente'];
+    $_SESSION['pedidos'] = [];
 }
 
-
-// Si NO hay cliente definido en la sesión todavía,
-// mostramos la página de bienvenida y paramos la ejecución
+// No hay definido un cliente todavía en la session 
 if (!isset($_SESSION['cliente'])) {
-    require_once 'bienvenida.php'; // Muestra formulario para introducir el nombre
-    exit();                        // Termina aquí el script
+    require_once 'bienvenida.php';
+    exit();
 }
 
 
-// Si se ha enviado un formulario con una acción...
+// Proceso las acciones 
 if (isset($_POST["accion"])) {
-
-    $fruta = $_POST["fruta"];       // Fruta elegida por el cliente
-    $cantidad = $_POST["cantidad"]; // Cantidad seleccionada
-
+    $fruta = $_POST["fruta"];
+    $cantidad = $_POST["cantidad"];
     switch ($_POST["accion"]) {
-
         case " Anotar ":
-            // Añadir o sumar la cantidad al pedido existente
+            // Actualizo la tabla de pedidos en la sesión
             if (isset($_SESSION['pedidos'][$fruta])) {
                 $_SESSION['pedidos'][$fruta] += $cantidad;
             } else {
                 $_SESSION['pedidos'][$fruta] = $cantidad;
             }
             break;
-
         case " Anular ":
-            // Elimina esta fruta de los pedidos
+            // Vacío la tabla de pedidos en la sesión
             unset($_SESSION['pedidos'][$fruta]);
             break;
-
         case " Terminar ":
-            // Genera el mensaje final de compra con tabla e importes
             $compraRealizada = htmlTablaPedidosImportes($precios);
-
-            // Muestra la página de despedida
+            // Destruyo la sesión y vuelvo a la página de bienvenida
             require_once 'despedida.php';
-
-            // Destruye la sesión para volver a estado inicial
             session_destroy();
-
-            exit(); // Finaliza aquí la ejecución del script
+            exit();
             break;
+          
     }
 }
 
-
-// Calcula la tabla con importes para mostrarla en la página de compra
 $compraRealizada = htmlTablaPedidosImportes($precios);
-
-// Carga la página principal de compra
 require_once 'compra.php';
 
 
-/* -------------------------------------------------------
-   FUNCIONES AUXILIARES
---------------------------------------------------------*/
-
-// Genera una tabla HTML simple con fruta y cantidad
+// Función axiliar que genera una tabla HTML a partir  la tabla de pedidos
+// Almacenada en la sesión
 function htmlTablaPedidos(): string
 {
     $msg = "";
     $msg .= "<table>";
-
-    foreach ($_SESSION['pedidos'] as $fruta => $cantidad) {
+    foreach ( $_SESSION['pedidos'] as $fruta => $cantidad){
         $msg .= "<tr><td> $fruta : $cantidad </td></tr>";
     }
-
-    $msg .= "</table>";
+    $msg .= "<table>";
     return $msg;
 }
-
-
-// Genera una tabla HTML con fruta, precio, cantidad e importes
+// Función axiliar que genera una tabla HTML a partir  la tabla de pedidos
+// Almacenada en la sesión
 function htmlTablaPedidosImportes($precios): string
 {
     $msg = "";
     $importeTotal = 0;
-
     $msg .= "<table>";
-    $msg .= "<th> Fruta </th><th> Cantidad x Importe </th><th> Subtotal </th>";
-
-    foreach ($_SESSION['pedidos'] as $fruta => $cantidad) {
-
-        $precio = $precios[$fruta];     // Precio unitario de la fruta
-        $importe = $precio * $cantidad; // Subtotal de esta fruta
-
-        $importeTotal += $importe;      // Acumula al total
-
-        // Fila de la tabla
+    $msg .= "<th> Fruta </th><th> Cantidad x Importe </th> <th> Subtotal </th>";
+    foreach ( $_SESSION['pedidos'] as $fruta => $cantidad){
+        $precio = $precios[$fruta];
+        $importe = $precio * $cantidad;
+        $importeTotal += $importe;
         $msg .= "<tr>";
         $msg .= "<td> $fruta </td>";
-        $msg .= "<td> $precio x $cantidad </td>";
+        $msg .= "<td> $precio x  $cantidad </td>";
         $msg .= "<td> $importe </td>";
         $msg .= "</tr>";
     }
-
-    // Fila final con el importe total
-    $msg .= "<tr><td colspan=2><b> Importe total :</b></td><td> $importeTotal </td></tr>";
+    $msg .= " <tr><td colspan=2><b> Importe total :</b></td><td> $importeTotal</td></tr>";
     $msg .= "</table>";
-
     return $msg;
 }
