@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php 
+    include "funciones.php"; //si no encuentra el archivo funciones.php salta un warning
+
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,12 +16,15 @@
 $num1 = random_int(1,10);
 $num2 = random_int(1,10);
 
-echo $num1.'+'.$num2. " = ". $num1+$num2;
-echo $num1.'-'.$num2. " = ". $num1-$num2;
-echo $num1.'*'.$num2. " = ". $num1*$num2;
-echo $num1.'/'.$num2. " = ". $num1/$num2;
-echo $num1.'%'.$num2. " = ". $num1%$num2;
-echo $num1.'**'.$num2. " = ". $num1**$num2;
+$resusuma=0;
+sumar2($num1,$num2,$resusuma);
+
+echo $num1.'+'.$num2. " = ". sumar($num1,$num2) . "<br>";
+echo $num1.'-'.$num2. " = ". $num1-$num2 . "<br>";
+echo $num1.'*'.$num2. " = ". $num1*$num2 . "<br>"; 
+echo $num1.'/'.$num2. " = ". $num1/$num2 . "<br>";
+echo $num1.'%'.$num2. " = ". $num1%$num2 . "<br>";
+echo $num1.'**'.$num2. " = ". $num1**$num2 . "<br>";
 
 ?>
 
