@@ -6,21 +6,25 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-    $n1 = random_int(1,9);
-    $x=1;
-    for($x==0;$x<=$n1;$x++) {
-        for($i=0;$i<$x;$i++){
-            if($x%2!=0){
-                 echo '<span style=" color: red;">'. $x.'</span>';
-            }else{
-                echo '<span style=" color: blue;">'. $x.'</span>';
-            }
+<?php 
+
+$num = random_int(1,9);
+echo "Número generado ". $num. "<br>";
+
+
+for ($i =1; $i<=$num;$i++){
+    for ($k =1; $k<=$i;$k++){
+        echo $i;
+        
+       
     }
-    echo "</br>";
-    }
-    
-    ?>
-    
+    echo "<br>";
+}
+
+ 
+
+
+
+?>    
 </body>
 </html>

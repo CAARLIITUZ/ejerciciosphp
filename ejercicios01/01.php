@@ -6,17 +6,19 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-    $n1 = random_int(1,10);
-    $n2 = random_int(1,10);
-    echo "Nº1 es: = ". $n1."</br>";
-    echo "Nº2 es: = ". $n2."</br><hr>";
-    echo "$n1+$n2= ". ($n1+$n2)."</br>";
-    echo "$n1-$n2= ". ($n1-$n2)."</br>";
-    echo "$n1*$n2= ". ($n1*$n2)."</br>";
-    echo "$n1/$n2= ". ($n1/$n2)."</br>";
-    echo "$n1%$n2= ". ($n1%$n2)."</br>";
-    echo "$n1**$n2= ". ($n1**$n2)."</br>";
-    ?>
+<?php
+
+$num1 = random_int(1,10);
+$num2 = random_int(1,10);
+
+echo $num1.'+'.$num2. " = ". $num1+$num2;
+echo $num1.'-'.$num2. " = ". $num1-$num2;
+echo $num1.'*'.$num2. " = ". $num1*$num2;
+echo $num1.'/'.$num2. " = ". $num1/$num2;
+echo $num1.'%'.$num2. " = ". $num1%$num2;
+echo $num1.'**'.$num2. " = ". $num1**$num2;
+
+?>
+
 </body>
 </html>
