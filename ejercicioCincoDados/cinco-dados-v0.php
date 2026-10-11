@@ -27,7 +27,12 @@ $tcharDados = [
 function generarDados(int $numdados): array
 {
   // Cambiar siempre se genera los mismo valores.
-  return [1, 2, 3, 4, 5, 6];
+  $dados=[];
+
+  for($i=0; $i<$numdados; $i++){
+    $dados[]=random_int(1,6);
+  }
+  return $dados;
 }
 
 /**
@@ -38,7 +43,21 @@ function generarDados(int $numdados): array
  */
 function calcularPuntos( array $tdados): int
 {
-   return 0;
+  $maximo = max($tdados);
+  $minimo = min($tdados);
+
+  $busqueda = array_search($maximo , $tdados);
+  if ($busqueda !== false){
+    unset($tdados[$busqueda]);
+  }
+
+  $busqueda2 = array_search($minimo , $tdados);
+  if ($busqueda2 !== false){
+    unset($tdados[$busqueda2]);
+  }
+
+  $suma = array_sum($tdados);
+   return $suma;
 }
 
 /**
@@ -65,9 +84,9 @@ function generarImagenes( array $tdados): string
   $msg = "";
   global $tcharDados;
     // COMPLETAR SOLO MUESTRA EL VALOR DE UN DADO 
-   $valor = $tdados[0];
-   $msg .= "<span style='font-size:100px;'>" . $tcharDados[ $valor] . "</span>";
-  
+  foreach($tdados as $valor){
+    $msg .= "<span style='font-size:100px;'>" . $tcharDados[ $valor] . "</span>";
+  }  
   return $msg;
 }
 
