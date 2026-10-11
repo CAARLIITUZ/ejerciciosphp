@@ -68,8 +68,14 @@ function calcularPuntos( array $tdados): int
  */
 function generarMensajeGanador(int $puntos1, int $puntos2): string
 {
+  if ($puntos1 == $puntos2){
+    return " EMPATE ";
+  }elseif ($puntos1 > $puntos2) {
+    return " GANA JUGADOR 1 ";
+  }else{
+    return " GANA JUGADOR 2 ";
+  }
   
-  return " SIN RESOLVER ";
 }
 
 // Función que genera un mensaje para múltiples ganadores
