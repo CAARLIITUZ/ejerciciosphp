@@ -1,30 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<?php 
+<html>
+	<head>
+	<meta charset="UTF-8">
+	</head>
+	
+	<body>
+		<h1>Ejercicio 2</h1>
+		<hr>
+		<?php
+			$num1 = random_int(1,9);
+			echo "El número es : ", $num1, "<br>";
+			for ($num2 = 0; $num2 <= $num1; $num2++) {
+				for ($num3 = 1; $num3 <= $num2; $num3++){
+					if($num2%2==0){
+						echo '<span style="color: red;">'. $num2 .'</span>';
+					}
+					else{
+						echo '<span style="color: blue;">'. $num2 .'</span>';
+					}
+				}
+				echo "<br>";
+			}
+		?>
 
-$num = random_int(1,9);
-echo "Número generado ". $num. "<br>";
-
-
-for ($i =1; $i<=$num;$i++){
-    for ($k =1; $k<=$i;$k++){
-        echo $i;
-        
-       
-    }
-    echo "<br>";
-}
-
- 
-
-
-
-?>    
+<hr>
+<?php show_source(__FILE__); ?>
+<hr>	
 </body>
 </html>

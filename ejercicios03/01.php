@@ -40,7 +40,7 @@ function mostrarMasVecesRepe(array $miArray){
 		</tr>
         <?php 
         foreach ($miArray as $num){
-            echo "<tr><td>$num</td>";
+            echo "<tr><td>$num</td></tr>";
         }
         ?> 
     </table>

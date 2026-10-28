@@ -9,26 +9,29 @@
     <h1>Ejercicio 4</h1>
 
     <?php
-    $contadorintentos = 0;
-    $contador6 = 0;
-    $tiempoantes = microtime(true);
-    $numAnterior = 0;
-    do {
-        $numero = random_int(1, 10);
-        $contadorintentos++;
-        if ($numero == 6) {
-            // Hay un seis
-            $contador6++;
-        } else {
-            // No hay seis
-            $contador6 = 0;
-        }
-    } while ($contador6 < 3);
-    // Calculo el tiempo que ha pasado
-    $tiempoInvertido = microtime(true) - $tiempoantes;
+        $cont_seis=0;
+        $cont_numeros=0;
+        $tiempoInicio= microtime(true);
+        while($cont_seis<3){
 
-    echo "Han salido tres 6 seguidos tras generar " . $contadorintentos . " números en " .
-        ($tiempoInvertido * 1000) . " milisegundos.";
+            $num_random = random_int(1,10);
+            $cont_numeros++;
+            if ($num_random != 6){
+                $cont_seis =0;
+            }
+
+            if($num_random ==6){
+                $cont_seis++;
+            }
+
+        }
+        $tiempoFinal= microtime(true);
+        $tiempoResultado = $tiempoFinal - $tiempoInicio;
+        $tiempoFormateado = number_format($tiempoResultado, 3, ".", ",");
+
+
+        echo "Han salido tres 6 seguidos tras generar ".$cont_numeros. " numeros en ".$tiempoFormateado;
+
     ?>
 
     <hr>

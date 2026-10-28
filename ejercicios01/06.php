@@ -15,18 +15,23 @@
       <div id="content">
         
         <table>
-         <?php
-         $num = random_int(1,10);
-         ?>
-         <tr><th>Tabla del <?=$num ?> </th><th></th></tr>
-        <?php   
-        
-        for ($i=1; $i <= 10; $i++){
-          echo "<tr><td> $num x $i =  </td><td style=\"text-align:right\">". ($i*$num). "</td>";
-           
-        }
-        ?>
-        </table>        
+          <?php
+            $num_random = random_int(1,10);
+          ?>
+          <tr> 
+            <th>Tabla del <?= $num_random  ?>  </th>
+            <th></th>
+          </tr>
+          
+          <?php
+            for($i =1; $i <=10; $i++){
+              $resultado = 0;
+              $resultado = $num_random * $i;
+              echo "<tr><td>$num_random x $i = </td><td>$resultado</td></tr>";
+            }
+          ?>
+
+        </table>       
     </div>
    </div>
 <hr>

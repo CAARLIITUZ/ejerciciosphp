@@ -15,7 +15,7 @@
 		table,
 		td,
 		th {
-			border: 0px;
+			border: 1px;
 		}
 	</style>
 

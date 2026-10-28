@@ -18,19 +18,18 @@ $medios = ["El pais"=>"https://elpais.com/",
 </head>
 <body>
     <div id="content">
-    <table>
-        <tr>
-			<th style="color: blue;">Periodicos</th>
-		</tr>
-        <tr>
-			<th style="color: blue;">Hiperenlaces</th>
-		</tr>
+    <ul>
         <?php 
-        foreach ($medios as $periodico){
-            echo "<tr><td>$periodico</td>";
-        }
-        ?> 
-    </table>
+        foreach ($medios as $clave => $valor):
+        ?>
+
+            <li> <a href="<?= $valor ?>"><?= $clave ?> </a> </li>
+        <?php
+        endforeach
+        ?>
+            
+         
+    </ul>
     
     
 </div>
