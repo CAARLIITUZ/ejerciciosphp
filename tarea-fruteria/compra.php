@@ -5,21 +5,26 @@
 <title>LA FRUTERIA - Realizar Compra</title>
 </head>
 <body>
-<H1> La Frutería del siglo XXI</H1>
+
+<H1>🍊🍊 La Frutería del siglo XXI 🍎🍎</H1> 
+
 <div class="container">
     <div class="compra-detalle">
         <?= $compraRealizada ?>
     </div>
     <div class="mensaje-principal">REALICE SU COMPRA, <?= htmlspecialchars($_SESSION['cliente']) ?></div>
     
-    <form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
+    <form  method="post">
         <label for="fruta">Selecciona la fruta:</label>
         <select name="fruta" id="fruta">
+            <!--
 			<option value="Platanos">Plátanos 🍌</option>
 			<option value="Naranjas">Naranjas 🍊</option>
 			<option value="Limones">Limones 🍋</option>
 			<option value="Manzanas">Manzanas 🍎</option>
-        </select>
+            -->
+            <?= generaOpciones() ?>
+        </select><br>
         
         <label for="cantidad">Cantidad (unidades/kg):</label>
         <input name="cantidad" id="cantidad" type="number" value="1" min="1" max="10" size="4">
